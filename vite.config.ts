@@ -3,7 +3,6 @@ import preact from '@preact/preset-vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/envelope_fiddle/',
 	plugins: [
 		preact({
 			prerender: {

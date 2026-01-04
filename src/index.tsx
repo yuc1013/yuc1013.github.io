@@ -1,18 +1,16 @@
-import { LocationProvider, Router, Route, hydrate, prerender as ssr } from 'preact-iso';
+import { LocationProvider, Router, Route, hydrate, prerender as ssr, useLocation } from 'preact-iso';
 
 import { NotFound } from './pages/_404.jsx';
 import './style.css';
 import About from './pages/About.js';
 import Wallpaper from './components/Wallpaper.js';
 
-const base = import.meta.env.BASE_URL;
-
 export function App() {
 	return (
 		<LocationProvider>
 			<main>
 				<Router>
-					<Route path={`${base}`} component={About} />
+					<Route path="/" component={About} />
 					<Route default component={NotFound} />
 				</Router>
 			</main>
