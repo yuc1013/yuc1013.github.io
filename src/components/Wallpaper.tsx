@@ -21,9 +21,9 @@ export default function Wallpaper() {
 
       (async () => {
         try {
-          const threeScript = await loadScript(`js/three.min.js`);
-          const guiScript   = await loadScript(`js/dat.gui.min.js`);
-          const customScript= await loadScript(`js/script.js`);
+          const threeScript = await loadScript(`/js/three.min.js`);
+          const guiScript   = await loadScript(`/js/dat.gui.min.js`);
+          const customScript= await loadScript(`/js/script.js`);
 
           if (!mounted) return
 
