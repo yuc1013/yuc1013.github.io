@@ -1,0 +1,7 @@
+.footer {
+  font-size: 0.875rem; /* 小字号，典型版权样式 */
+  color: #666;          /* 灰色文字 */
+  text-align: center;   /* 居中显示 */
+  line-height: 1.5;
+  padding: 1rem 0;      /* 上下间距 */
+}
