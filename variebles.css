@@ -1,0 +1,68 @@
+:root {
+    /* Solarized 核心调色板 (基础色) */
+    --sol-base03:  #002b36;
+    --sol-base02:  #073642;
+    --sol-base01:  #586e75;
+    --sol-base00:  #657b83;
+    --sol-base0:   #839496;
+    --sol-base1:   #93a1a1;
+    --sol-base2:   #eee8d5;
+    --sol-base3:   #fdf6e3;
+
+    /* 强调色 */
+    --sol-yellow:  #b58900;
+    --sol-orange:  #cb4b16;
+    --sol-red:     #dc322f;
+    --sol-magenta: #d33682;
+    --sol-violet:  #6c71c4;
+    --sol-blue:    #268bd2;
+    --sol-cyan:    #2aa198;
+    --sol-green:   #859900;
+
+    /* 辅助色 */
+    --sol-pine: #6F814A;
+    --sol-yozi: #DFA083;
+}
+
+/* 默认：Light Mode (浅色模式) */
+:root, [data-theme='light'] {
+    --bg-main:      var(--sol-base3);
+    --bg-code:      var(--sol-base2);
+    --text-main:    var(--sol-base00);
+    --text-title:   var(--sol-base01);
+    --text-muted:   var(--sol-base0);
+    --border:       var(--sol-base2);
+    --accent:       var(--sol-pine);
+    --inline-code:  var(--sol-magenta);
+    --blockquote:   var(--sol-base1);
+    --table-stripe: #f5efdc;
+}
+
+/* 自动检测深色模式 或 通过 [data-theme='dark'] 切换 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-main:      var(--sol-base03);
+        --bg-code:      var(--sol-base02);
+        --text-main:    var(--sol-base0);
+        --text-title:   var(--sol-base1);
+        --text-muted:   var(--sol-base01);
+        --border:       var(--sol-base02);
+        --accent:       var(--sol-pine);
+        --inline-code:  var(--sol-cyan);
+        --blockquote:   var(--sol-base01);
+        --table-stripe: #073a47;
+    }
+}
+
+[data-theme='dark'] {
+    --bg-main:      var(--sol-base03);
+    --bg-code:      var(--sol-base02);
+    --text-main:    var(--sol-base0);
+    --text-title:   var(--sol-base1);
+    --text-muted:   var(--sol-base01);
+    --border:       var(--sol-base02);
+    --accent:       var(--sol-pine);
+    --inline-code:  var(--sol-cyan);
+    --blockquote:   var(--sol-base01);
+    --table-stripe: #073a47;
+}

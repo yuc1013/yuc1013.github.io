@@ -1,0 +1,10 @@
+/* 消除 body 默认边距 */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 统一盒子模型（非常重要，防止 padding 撑开宽度） */
+*, *::before, *::after {
+  box-sizing: border-box;
+}

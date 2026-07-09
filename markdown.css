@@ -1,0 +1,119 @@
+/* --- Markdown 元素样式 --- */
+.markdown-content {
+    line-height: 1.7;
+}
+
+/* 标题样式 */
+.markdown-content h1, .markdown-content h2, .markdown-content h3, .markdown-content h4, .markdown-content h5, .markdown-content h6 {
+    color: var(--text-title);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.markdown-content h1 { font-size: 2.25em; border-bottom: 2px solid var(--border); padding-bottom: 0.3em; }
+.markdown-content h2 { font-size: 1.75em; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+.markdown-content h3 { font-size: 1.5em; }
+
+/* 链接 */
+.markdown-content a {
+    color: var(--accent);
+    text-decoration: none;
+    text-underline-offset: 4px;
+}
+
+.markdown-content a:hover {
+    text-decoration: underline;
+}
+
+/* 段落与列表 */
+.markdown-content p { margin-bottom: 1rem; }
+
+.markdown-content ul, .markdown-content ol { padding-left: 2rem; margin-bottom: 1rem; }
+.markdown-content li { margin-bottom: 0.5rem; }
+
+/* 引用 */
+.markdown-content blockquote {
+    margin: 1.5rem 0;
+    padding: 0.5rem 1rem;
+    color: var(--text-muted);
+    border-left: 4px solid var(--blockquote);
+    background-color: rgba(128, 128, 128, 0.05);
+}
+
+/* 代码 */
+.markdown-content code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    padding: 0.2em 0.4em;
+    background-color: var(--bg-code);
+    color: var(--inline-code);
+    border-radius: 4px;
+}
+
+.markdown-content pre {
+    padding: 1rem;
+    overflow: auto;
+    background-color: var(--bg-code);
+    border-radius: 6px;
+    line-height: 1.45;
+}
+
+.markdown-content pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* 表格 */
+.markdown-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.markdown-content th, .markdown-content td {
+    padding: 12px;
+    border: 1px solid var(--border);
+}
+
+.markdown-content th {
+    background-color: var(--bg-code);
+    color: var(--text-title);
+}
+
+.markdown-content tr:nth-child(even) {
+    background-color: var(--table-stripe);
+}
+
+/* 分割线 */
+.markdown-content hr {
+    height: 2px;
+    padding: 0;
+    margin: 2rem 0;
+    background-color: var(--border);
+    border: 0;
+}
+
+/* 图片 */
+.markdown-content img {
+    /* Not too high */
+    max-height: 400px;
+    /* Not too wide */
+    max-width: 75%;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    .markdown-content img {
+        filter: brightness(.8);
+    }
+}
+
+[data-theme='dark'] {
+    .markdown-content img {
+        filter: brightness(.8);
+    }
+}

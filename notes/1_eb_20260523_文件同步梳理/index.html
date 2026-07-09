@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>文件同步梳理- 赭原支部</title>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="description" content="">
+
+    
+    <link rel='stylesheet' type='text/css' media='screen' href='/UA.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/variebles.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/base.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/components.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/responsive.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/markdown.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+    
+    
+<header>
+    <nav class="tag-effect-wrapper" style="display: flex;">
+        <div style="flex: 1;"></div>
+        <a href="/" title="Home">Home</a>
+        <a href="/notes/" title="Notes">Notes</a>
+        <a href="/notes-archives/" title="Archives">Archives</a>
+        <a href="/tags/" title="Tags">Tags</a>
+        
+        <a href="/about/" title="About">About</a>
+    </nav>
+</header>
+
+    
+<main class="single">
+    <h1>文件同步梳理</h1>
+    <p class="flag">
+        <a href="/notes" title="Return upper"><span style="display: inline-block; transform: rotate(180deg);">⤵</span> 返回 /notes</a>
+         · 
+        <span style="display: inline-block; padding: 0.25rem 0;">@舞雩夕</span>
+         · 
+        <time datetime="2026-05-23">Sat, May 23, 2026</time>
+        &nbsp;·<a class="tag-effect" href="/tags/eb_%e6%8a%98%e8%85%be%e5%bf%83%e5%be%97">eb_折腾心得</a></p>
+    <div class="markdown-content"><p>故事的开始，你可能只是想把做完的 PPT 放到 U 盘里，带给别的朋友展示；之后某次，你发现自己手机中的照片占用的空间越来越大，需要找一个地方放；除此之外，你可能还在一些不同的地方编辑了这些文件……而故事的线索，逐渐指向了一个名叫“文件同步”的东西。</p>
+<h2>文件同步的愿望</h2>
+<p><img src="/images/filesync.png" alt=""></p>
+<p>文件同步的愿望非常非常纯粹：离线化、空间大、文件新。</p>
+<p>首先，本地编辑的体验大部分时候都好得多，能本地编辑肯定是不上网的；其次，空间自然是多多益善，没人会嫌自己空间太多；最后，没有人会希望自己着急要用一个文件时，发现它还是自己一个星期前编辑的版本，那就很可怕了。</p>
+<h2>三个愿望，一次满足</h2>
+<p>既然有这三个愿望，那么就直接满足不就行了？</p>
+<p>欸，很可惜，同时满足这三个愿望的费用非常感人。以还算良心的 iCloud 为例，它最高只提供 12TB 的同步盘空间，此时它的月资费已经来到了 398 元。</p>
+<p><img src="/images/icloud.png" alt=""></p>
+<h2>三个愿望，只取其二</h2>
+<p>幸运的是，如果我们只实现这三个愿望的其中两个，那么成本将会出现奇迹性的降低，到达一个普通人也能接受的水平。</p>
+<ul>
+<li>空间大+文件新：代表产品为 NAS 和 Win2NAS。使用廉价硬盘就可以组出超大空间的存储，并且由于增删都在个人云上，所以不存在什么同步问题；</li>
+<li>离线化+文件新：代表产品为 iCloud 和 Git。服务器的权威状态，保证了完全不需要等待同步。不需要存储大文件的话，它们是非常理想的选择；</li>
+<li>空间大+离线化：代表产品为 PSSD。只要把移动硬盘插上，电脑就获得了一片巨大的空间。缺点在于文件版本管理起来会很痛苦，如果家里电脑和移动硬盘存储了同一份文件，可能会经常忘记去同步它们。</li>
+</ul>
+<p>对我而言，这几种解决方案都很重要。我使用 iCloud 来存储经常更新的近期照片，并无感更新；使用 Git 来存储经常修改的代码和项目，这样还有一个额外的好处，就是它们在云端也拥有备份；我也使用 Win2NAS 作为我的个人网盘，因为它可以轻松拥有很大的空间；当我知道自己可能离线时，我也会带上一块移动硬盘，来应对可能存在的空间需求。</p>
+<h2>奇技淫巧：通过 iCloud+Numbers 模拟私人数据库</h2>
+<p>有的时候，可能需要记录一些自己的数据（比如睡眠时间），但是又不想处理复杂的数据库操作，也不想使用第三方软件，那么可以试试通过在 iCloud 中创建一个 Numbers 表格来达到类似于数据库的效果。由于 iCloud 支持云端编辑，理论上任何一个有浏览器的地方都可以访问这个数据库！</p>
+</div>
+</main>
+
+    
+<footer style="height: 3rem;"></footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            
+            if (link.hostname && link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},  
+                    {left: '$', right: '$', display: false},  
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+            });
+        });
+    </script>
+</body>
+</html>

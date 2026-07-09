@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>赭原支部</title>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="description" content="">
+
+    
+    <link rel='stylesheet' type='text/css' media='screen' href='/UA.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/variebles.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/base.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/components.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/responsive.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/markdown.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+    
+    
+<aside class="anime">
+    <p>@舞雩夕 最近在看 <a href="https://www.themoviedb.org/tv/69291">《小林家的龙女仆》</a></p>
+    <img src="/anime/maid.webp" alt="小林家的龙女仆">
+    <p>“好想要一间两室一厅的公寓～还有一头龙！”</p>
+</aside>
+
+    
+    
+<header>
+    <nav class="tag-effect-wrapper" style="display: flex;">
+        <div style="flex: 1;"></div>
+        <a href="/" title="Home">Home</a>
+        <a href="/notes/" title="Notes">Notes</a>
+        <a href="/notes-archives/" title="Archives">Archives</a>
+        <a href="/tags/" title="Tags">Tags</a>
+        
+        <a href="/about/" title="About">About</a>
+    </nav>
+</header>
+
+    
+<main class="home">
+    
+<p id="anniversary" style="display: none;">
+    🎉 今天是赭原支部的 <span id="year-count"></span> 周年纪念日！🎂
+</p>
+
+<style>
+    #anniversary {
+        font-weight: 500;
+        font-size: x-large;
+        text-align: center;
+    }
+</style>
+
+<script>
+    (function() {
+        const start = "2026-05-02"; 
+        const today = new Date().toISOString().split('T')[0]; 
+
+        
+        if (today.slice(5) === start.slice(5)) {
+            const years = new Date().getFullYear() - parseInt(start.substring(0, 4));
+            if (years >= 0) {
+                document.getElementById('year-count').innerText = years;
+                document.getElementById('anniversary').style.display = 'block';
+            }
+        }
+    })();
+</script>
+
+    <h1>🪨 赭原支部</h1>
+    <div class="latest">
+        <h2><a href="/notes/" title="Notes" style="color: var(--text-title);">📔 最近的笔记 >></a></h2>
+        
+        <article class="latest">
+            <h3><a href="/notes/1_ba_20260629_%e5%be%ae%e7%a7%af%e5%88%86%ef%bc%9a%e5%88%a9%e7%94%a8%e5%a4%96%e4%bb%a3%e6%95%b0%e8%bf%9b%e8%a1%8c%e6%8d%a2%e5%85%83" title="微积分：利用外代数进行换元">微积分：利用外代数进行换元</a></h3>
+            <p class="time"><time datetime="2026-06-29">Mon, Jun 29, 2026</time></p>
+        </article>
+        
+        <article class="latest">
+            <h3><a href="/notes/1_bb_20260526_%e6%9c%ba%e6%a2%b0%e8%87%82%e7%9a%84%e8%bd%ac%e5%8a%a8%ef%bc%9a%e4%bb%bf%e5%b0%84%e5%8f%98%e6%8d%a2" title="机械臂的转动：仿射变换">机械臂的转动：仿射变换</a></h3>
+            <p class="time"><time datetime="2026-05-26">Tue, May 26, 2026</time></p>
+        </article>
+        
+        <article class="latest">
+            <h3><a href="/notes/1_eb_20260523_%e6%96%87%e4%bb%b6%e5%90%8c%e6%ad%a5%e6%a2%b3%e7%90%86" title="文件同步梳理">文件同步梳理</a></h3>
+            <p class="time"><time datetime="2026-05-23">Sat, May 23, 2026</time></p>
+        </article>
+        
+        <p style="margin-left: .5rem;"><a href="/notes/" title="Notes" style="font-weight: 400; color: var(--text-title);">Show More</a></p>
+    </div>
+</main>
+
+    
+<footer style="height: 3rem;"></footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            
+            if (link.hostname && link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},  
+                    {left: '$', right: '$', display: false},  
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+            });
+        });
+    </script>
+</body>
+</html>
