@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>MacOS系统数据异常膨胀- 赭原支部</title>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="description" content="">
+
+    
+    <link rel='stylesheet' type='text/css' media='screen' href='/UA.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/variebles.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/base.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/components.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/responsive.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/markdown.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+    
+    
+<header>
+    <nav class="tag-effect-wrapper" style="display: flex;">
+        <div style="flex: 1;"></div>
+        <a href="/" title="Home">Home</a>
+        <a href="/notes/" title="Notes">Notes</a>
+        <a href="/notes-archives/" title="Archives">Archives</a>
+        <a href="/tags/" title="Tags">Tags</a>
+        
+        <a href="/about/" title="About">About</a>
+    </nav>
+</header>
+
+    
+<main class="single">
+    <h1>MacOS系统数据异常膨胀</h1>
+    <p class="flag">
+        <a href="/notes" title="Return upper"><span style="display: inline-block; transform: rotate(180deg);">⤵</span> 返回 /notes</a>
+         · 
+        <span style="display: inline-block; padding: 0.25rem 0;">@舞雩夕</span>
+         · 
+        <time datetime="2026-02-04">Wed, Feb 4, 2026</time>
+        &nbsp;·<a class="tag-effect" href="/tags/eb_%e6%8a%98%e8%85%be%e5%bf%83%e5%be%97">eb_折腾心得</a></p>
+    <div class="markdown-content"><p>某天突然发现储存空间爆红，删完“下载”里面没用的文件后，竟然还有高达160多G的“系统数据”——</p>
+<p><img src="/images/system_storage.png" alt=""></p>
+<h2>排查过程</h2>
+<ul>
+<li>包管理器：首先怀疑是包管理器的问题。把yarn换成了pnpm，清空cache，删了一些brew包，这下空出了20多G的空间，但仍然不够；</li>
+<li>应用数据：把<code>储存空间-&gt;文稿-&gt;文件浏览器</code>里面太大的文件夹能删的都删了，这下又空出了10个G左右的空间，但是最关键的“系统数据”还是没有太大变化；</li>
+<li>正在我一筹莫展之际，看到了这篇 Reddit 帖子：<a href="https://www.reddit.com/r/MacOS/comments/154rp99/how_to_do_i_clear_system_data_on_mac_os/?tl=zh-hans">https://www.reddit.com/r/MacOS/comments/154rp99/how_to_do_i_clear_system_data_on_mac_os/?tl=zh-hans</a>，而这就引出了本文的主角——「Spotlight」；</li>
+</ul>
+<h2>Spotlight索引系统</h2>
+<p>下面是Wikipedia上关于Spotlight的介绍：</p>
+<blockquote>
+<p>Spotlight 是苹果的macOS、iOS、iPadOS和visionOS操作系统的系统全系统桌面搜索功能。Spotlight是一个基于选择的搜索系统，它创建了系统上所有项目和文件的索引。它旨在允许用户在计算机上快速找到各种项目，包括文档、图片、音乐、应用程序和系统设置。此外，还可以<strong>搜索文档</strong>和网页浏览器历史记录或书签中的<strong>特定单词</strong>。它还允许用户通过创建日期、修改日期、大小、类型和其他属性缩小搜索范围。Spotlight还可以快速访问内置新牛津美国词典的定义和计算器功能。还有命令行工具来执行功能，例如聚焦搜索。</p>
+</blockquote>
+<p>搜索文档？特定单词？这意味着它不仅是一个元数据搜索引擎，它还是一个<strong>全文搜索引擎</strong>！在“设置”中我们可以看到，非常非常多的文件都会被纳入Spotlight的检查范围之内。。。</p>
+<p><img src="/images/spotlight_files.png" alt=""></p>
+<h2>Spotlight-V100</h2>
+<p>Spotlight的索引存储在哪里呢？答案是每一个连接到MacOS的硬盘的根目录下的Spotlight-V100文件夹中。对于Macbook自带的硬盘来说，就是<code>/System/Volumes/Data/.Spotlight-V100 </code>，可以在“终端”中用以下命令查看它的大小：</p>
+<pre><code class="language-bash">sudo du -hs /System/Volumes/Data/.Spotlight-V100/
+</code></pre>
+<p>删除它有两种办法：</p>
+<ul>
+<li>Apple官方提供的办法：<a href="https://support.apple.com/en-sg/102321">https://support.apple.com/en-sg/102321</a>，将硬盘添加到隐私排除目录再加回来；</li>
+<li>命令行方法：<code>sudo rm -Rf /System/Volumes/Data/.Spotlight-V100/\*</code></li>
+</ul>
+<p>我足足删掉了100GB的索引文件！</p>
+<h2>最后</h2>
+<p>可以使用以下命令排查其他大文件夹问题：<code>du -h /System/Volumes/Data | grep &quot;G\t&quot; | sort </code></p>
+<p>参考链接：<a href="https://www.reddit.com/r/MacOS/comments/154rp99/how_to_do_i_clear_system_data_on_mac_os/?tl=zh-hans">https://www.reddit.com/r/MacOS/comments/154rp99/how_to_do_i_clear_system_data_on_mac_os/?tl=zh-hans</a></p>
+</div>
+</main>
+
+    
+<footer style="height: 3rem;"></footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            
+            if (link.hostname && link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},  
+                    {left: '$', right: '$', display: false},  
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>机械臂的转动：仿射变换- 赭原支部</title>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="description" content="">
+
+    
+    <link rel='stylesheet' type='text/css' media='screen' href='/UA.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/variebles.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/base.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/components.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/responsive.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/markdown.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+    
+    
+<header>
+    <nav class="tag-effect-wrapper" style="display: flex;">
+        <div style="flex: 1;"></div>
+        <a href="/" title="Home">Home</a>
+        <a href="/notes/" title="Notes">Notes</a>
+        <a href="/notes-archives/" title="Archives">Archives</a>
+        <a href="/tags/" title="Tags">Tags</a>
+        
+        <a href="/about/" title="About">About</a>
+    </nav>
+</header>
+
+    
+<main class="single">
+    <h1>机械臂的转动：仿射变换</h1>
+    <p class="flag">
+        <a href="/notes" title="Return upper"><span style="display: inline-block; transform: rotate(180deg);">⤵</span> 返回 /notes</a>
+         · 
+        <span style="display: inline-block; padding: 0.25rem 0;">@舞雩夕</span>
+         · 
+        <time datetime="2026-05-26">Tue, May 26, 2026</time>
+        &nbsp;·<a class="tag-effect" href="/tags/bb_%e7%89%a9%e7%90%86%e5%ad%a6">bb_物理学</a></p>
+    <div class="markdown-content"><p>以肘-腕为例，两段臂的运动可以看作两个运动的复合：手末端相对于腕关节的旋转运动，和腕关节相对于肘关节的平移运动。</p>
+<p>可以用这样的公式来描述：</p>
+<p>$$
+手相对于肘 = 旋转矩阵 \times 手相对于腕 + 腕相对于肘
+$$</p>
+<p>用数学语言来描述的话：</p>
+<p>$$
+y = R_1 \times x + P_1
+$$</p>
+<p>注意到：</p>
+<ol>
+<li>“腕相对于肘”是一个相当随意的值，并不会干扰手-腕的运动，所以这里是加法；</li>
+<li>这是一个类似于数列中的递推公式，如果肘不是最终目标，那么就把 $y$ 带入到 $z=R_2 \times y + P_2$ 即可；</li>
+<li>第二个发现可以“套娃”，所以我们只需要研究两段臂即可；</li>
+</ol>
+<p>该变换称为<strong>仿射变换</strong>。</p>
+<h2>齐次变换矩阵：更好看的仿射变换</h2>
+<p>下面的矩阵与腕相对于肘的平移操作是等价的：</p>
+<p>$$
+T_{mov} = \begin{bmatrix} I_{3\times3} & P_{3\times1} \cr 0_{1\times3} & 1 \end{bmatrix}
+$$</p>
+<p>下面的矩阵与手相对于腕的旋转矩阵是等价的：</p>
+<p>$$
+T_{rot} = \begin{bmatrix} R_{3\times3} & 0_{3\times1} \cr 0_{1\times3} & 1 \end{bmatrix}
+$$</p>
+<p>以下矩阵与仿射变换是等价的：</p>
+<p>$$
+T = \begin{bmatrix} R_{3\times3} & P_{3\times1} \cr 0_{1\times3} & 1 \end{bmatrix}
+$$</p>
+<p>这就叫作<strong>齐次变换矩阵</strong>。</p>
+<p>注意到了吗？$T = T_{mov} \times T_{rot}$ （顺序很重要）！</p>
+<h2>习题</h2>
+<p>以下习题由 Google Gemini 编写，我做着感觉质量挺高的。</p>
+<blockquote>
+<h3>题 1. 在机器人学和计算机图形学中，标准的机器人三维空间齐次变换矩阵 $T$ 的维度通常是多少？</h3>
+<p><strong>提示：</strong> 想一想为了在一个方阵中同时表达 3D 旋转（3×3）和平移（3×1），并且使其能够进行矩阵连乘，矩阵的维度应该如何扩展？</p>
+<h4>选项</h4>
+<ul>
+<li><input disabled="" type="checkbox"> 3 × 3
+<em>解析：3 × 3 矩阵只能表示三维空间中的纯旋转，无法同时用矩阵乘法包含平移操作。</em></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> 4 × 4
+<em>解析：通过引入齐次坐标，使用 4 × 4 矩阵可以将三维空间中的旋转和平移统一为一个矩阵乘法操作。</em></li>
+<li><input disabled="" type="checkbox"> 3 × 4
+<em>解析：3 × 4 矩阵虽然可以包含旋转和平移信息，但它不是方阵，无法进行连续的矩阵自乘（连乘）。</em></li>
+<li><input disabled="" type="checkbox"> 4 × 3
+<em>解析：4 × 3 矩阵无法与四维齐次坐标进行左乘运算，也无法实现多级坐标系的连续变换。</em></li>
+</ul>
+<hr>
+<h3>题 2. 已知一个三维齐次变换矩阵 $T = \begin{bmatrix} R_{3\times3} & P_{3\times1} \cr 0_{1\times3} & 1 \end{bmatrix}$，其中右上角的 $P_{3\times1}$ 向量代表什么几何意义？</h3>
+<p><strong>提示：</strong> 齐次变换矩阵主要由姿态部分和位置部分组成。回忆一下表达位置的向量位于矩阵的哪个区域。</p>
+<h4>选项</h4>
+<ul>
+<li><input disabled="" type="checkbox"> 新坐标系相对于原坐标系的缩放比例
+<em>解析：缩放通常体现在主对角线元素的系数上，而不是独立的列向量。</em></li>
+<li><input disabled="" type="checkbox"> 新坐标系相对于原坐标系的旋转轴方向
+<em>解析：旋转方向和姿态由左上角的 3 × 3 旋转矩阵 $R$ 完全决定。</em></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> 新坐标系原点在原坐标系中的位置（平移向量）
+<em>解析：右上角的 3 × 1 列向量表示两个坐标系原点之间的位移，即平移变换。</em></li>
+<li><input disabled="" type="checkbox"> 投影变换的中心点坐标
+<em>解析：在仿射变换和刚体变换中，最后一行固定为 [0 0 0 1]，不涉及透视投影变换。</em></li>
+</ul>
+<hr>
+<h3>题 3. 如果仅沿 $X$ 轴平移 5 个单位，沿 $Y$ 轴平移 -3 个单位，不发生任何旋转。对应的二维齐次变换矩阵（基于 3 × 3）形式应该是结构怎样的？</h3>
+<p><strong>提示：</strong> 二维齐次变换矩阵形如 $\begin{bmatrix} R_{2\times2} & P_{2\times1} \cr 0 & 1 \end{bmatrix}$。没有旋转时，$R$ 为单位矩阵。</p>
+<h4>选项</h4>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> $\begin{bmatrix} 1 & 0 & 5 \cr 0 & 1 & -3 \cr 0 & 0 & 1 \end{bmatrix}$
+<em>解析：二维变换中，左上角 2 × 2 为单位阵表示无旋转，第三列前两个元素分别对应 $X$ 和 $Y$ 方向的平移量。</em></li>
+<li><input disabled="" type="checkbox"> $\begin{bmatrix} 5 & 0 & 0 \cr 0 & -3 & 0 \cr 0 & 0 & 1 \end{bmatrix}$
+<em>解析：此矩阵表示在 $X$ 和 $Y$ 方向上分别缩放了 5 倍和 -3 倍，而不是平移。</em></li>
+<li><input disabled="" type="checkbox"> $\begin{bmatrix} 1 & 0 & 0 \cr 0 & 1 & 0 \cr 5 & -3 & 1 \end{bmatrix}$
+<em>解析：平移量被错误地写在了最后一行，标准的齐次变换矩阵最后一行应为 [0 0 1]（二维）。</em></li>
+<li><input disabled="" type="checkbox"> $\begin{bmatrix} 0 & -1 & 5 \cr 1 & 0 & -3 \cr 0 & 0 & 1 \end{bmatrix}$
+<em>解析：左上角的矩阵不再是单位阵，这意味着坐标系发生了 90 度的旋转，不符合题目中“不发生旋转”的条件。</em></li>
+</ul>
+<hr>
+<h3>题 4. 空间中某点在当前坐标系下的齐次坐标为 $P_B = [1, 2, 0, 1]^T$。已知变换矩阵 $T_B^A = \begin{bmatrix} 1 & 0 & 0 & 3 \cr 0 & 1 & 0 & 4 \cr 0 & 0 & 1 & 5 \cr 0 & 0 & 0 & 1 \end{bmatrix}$，求该点在基坐标系 $A$ 下的坐标 $P_A$。</h3>
+<p><strong>提示：</strong> 利用坐标变换公式 $P_A = T_B^A \cdot P_B$，将 4 × 4 矩阵与 4 × 1 列向量进行标准的矩阵乘法即可。</p>
+<h4>选项</h4>
+<ul>
+<li><input disabled="" type="checkbox"> [3, 4, 5, 1]^T
+<em>解析：这忽略了点原本在 $B$ 坐标系中的自主位移 $[1, 2, 0]^T$，仅仅得到了新坐标系的原点位置。</em></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> [4, 6, 5, 1]^T
+<em>解析：根据矩阵乘法 $P_A = T_B^A \cdot P_B$，计算结果为 $x = 1\times1 + 3 = 4$，$y = 1\times2 + 4 = 6$，$z = 1\times0 + 5 = 5$。</em></li>
+<li><input disabled="" type="checkbox"> [1, 2, 0, 1]^T
+<em>解析：这代表点在两个坐标系下的坐标完全相同，忽略了坐标系之间存在的平移偏置。</em></li>
+<li><input disabled="" type="checkbox"> [4, 8, 0, 1]^T
+<em>解析：计算乘法时出现了失误，没有正确执行矩阵整行与列向量的内积规则。</em></li>
+</ul>
+<hr>
+<h3>题 5. 机械臂有三个关节，基座为坐标系 0。若已知关节 1 相对基座的变换为 $T_1^0$，关节 2 相对关节 1 的变换为 $T_2^1$，末端工具相对关节 2 的变换为 $T_3^2$。如何求末端工具相对于基座的完整变换矩阵 $T_3^0$？</h3>
+<p><strong>提示：</strong> 想一想齐次变换的“链式消去法则”，就像分式约分一样，上标和下标是如何衔接的？</p>
+<h4>选项</h4>
+<ul>
+<li><input disabled="" type="checkbox"> $T_3^0 = T_1^0 + T_2^1 + T_3^2$
+<em>解析：齐次变换矩阵的组合是通过乘法实现的，矩阵加法在几何上没有耦合嵌套的物理意义。</em></li>
+<li><input disabled="" type="checkbox"> $T_3^0 = T_3^2 \cdot T_2^1 \cdot T_1^0$
+<em>解析：由于矩阵乘法不满足交换律，从右往左乘通常对应于相对于当前动态轴（局部坐标系）的变换，这里的相对描述需要从左往右链式相乘。</em></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> $T_3^0 = T_1^0 \cdot T_2^1 \cdot T_3^2$
+<em>解析：根据齐次变换的链式法则，相邻坐标系消除的顺序为：$T_3^0 = T_1^0 \cdot T_2^1 \cdot T_3^2$。这体现了正运动学矩阵连乘的本质。</em></li>
+<li><input disabled="" type="checkbox"> $T_3^0 = (T_1^0 \cdot T_3^2) \cdot T_2^1$
+<em>解析：打乱变换矩阵的先后相乘顺序会使上级坐标系与下级连杆的相对依赖关系彻底崩溃。</em></li>
+</ul>
+<hr>
+<h3>题 6. 已知一个三维齐次变换矩阵的旋转部分 $R$ 是一个正交矩阵。那么该齐次变换矩阵的逆矩阵 $T^{-1}$ 的最后一行始终是什么？</h3>
+<p><strong>提示：</strong> 齐次变换矩阵的最后一行用于维持齐次坐标的规范化（Scale系数为1）。求逆变换时，空间的刚体性质并不会被破坏。</p>
+<h4>选项</h4>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> [0, 0, 0, 1]
+<em>解析：刚体齐次变换矩阵（仅包含旋转和平移）的逆矩阵仍然属于刚体变换矩阵，其最后一行永远固定为 [0, 0, 0, 1]。</em></li>
+<li><input disabled="" type="checkbox"> [0, 0, 0, 0]
+<em>解析：如果最后一位是 0，矩阵将变成奇异矩阵（行列式为0），无法求逆，也失去了齐次坐标的常数缩放意义。</em></li>
+<li><input disabled="" type="checkbox"> 由平移向量的负数决定，例如 $[-x, -y, -z, 1]$
+<em>解析：平移量的负数会经过旋转矩阵运算后，体现在逆矩阵的第四列（右上角），而不是最后一行。</em></li>
+<li><input disabled="" type="checkbox"> 不确定，取决于具体的旋转角度
+<em>解析：无论旋转角度如何变化，它只影响左上角 3 × 3 的区域，最后一行的仿射常量始终不随旋转而改变。</em></li>
+</ul>
+<hr>
+<h3>题 7. 在三维空间中，若坐标系 $B$ 是由坐标系 $A$ 绕自身 $Z$ 轴旋转 $\theta$ 角度得到的（无平移）。该齐次变换矩阵 $T_B^A$ 的左上角 3 × 3 旋转部分应该是什么？</h3>
+<p><strong>提示：</strong> 绕哪个轴旋转，对应的轴在矩阵基底变换中就保持不变。绕 $Z$ 轴旋转意味着矩阵的第三行和第三列除了交点为 1 外其余均为 0。</p>
+<h4>选项</h4>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> $\begin{bmatrix} \cos\theta & -\sin\theta & 0 \cr \sin\theta & \cos\theta & 0 \cr 0 & 0 & 1 \end{bmatrix}$
+<em>解析：绕 $Z$ 轴旋转时，$Z$ 坐标保持不变（对应对角线上的 1），而 $X$ 和 $Y$ 平面发生标准的二维旋转。</em></li>
+<li><input disabled="" type="checkbox"> $\begin{bmatrix} 1 & 0 & 0 \cr 0 & \cos\theta & -\sin\theta \cr 0 & \sin\theta & \cos\theta \end{bmatrix}$
+<em>解析：这是绕 $X$ 轴旋转时的旋转矩阵结构，此时 $X$ 坐标保持不变。</em></li>
+<li><input disabled="" type="checkbox"> $\begin{bmatrix} \cos\theta & 0 & \sin\theta \cr 0 & 1 & 0 \cr -\sin\theta & 0 & \cos\theta \end{bmatrix}$
+<em>解析：这是绕 $Y$ 轴旋转时的旋转矩阵结构，此时 $Y$ 坐标保持不变。</em></li>
+<li><input disabled="" type="checkbox"> $\begin{bmatrix} \cos\theta & \sin\theta & 0 \cr -\sin\theta & \cos\theta & 0 \cr 0 & 0 & 1 \end{bmatrix}$
+<em>解析：这代表沿着相反方向（顺时针）旋转了 $\theta$ 角度，符号位置颠倒了。</em></li>
+</ul>
+<hr>
+<h3>题 8. 齐次坐标 $[2, 4, 6, 2]^T$ 映射回实际的三维空间直角坐标（笛卡尔坐标）后是什么？</h3>
+<p><strong>提示：</strong> 齐次坐标转化为普通坐标的公式为：$[x, y, z]^T = [X/w, Y/w, Z/w]^T$，其中 $w$ 为第四个元素。</p>
+<h4>选项</h4>
+<ul>
+<li><input disabled="" type="checkbox"> [2, 4, 6]^T
+<em>解析：这忽略了第四个分量（齐次因子 $w=2$）的缩放作用，直接把前三个分量当成了结果。</em></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> [1, 2, 3]^T
+<em>解析：齐次坐标转换回直角坐标的规则是前三个分量分别除以第四个分量 $w$，即 $[2/2, 4/2, 6/2]^T = [1, 2, 3]^T$。</em></li>
+<li><input disabled="" type="checkbox"> [4, 8, 12]^T
+<em>解析：计算时错误地将前三个分量乘以了第四个分量，而非执行消除因子的除法。</em></li>
+<li><input disabled="" type="checkbox"> [0, 0, 0]^T
+<em>解析：只有当前三个分量全为 0 且 $w \neq 0$ 时，映射结果才会是原点。</em></li>
+</ul>
+<hr>
+<h3>题 9. 如果两个齐次变换矩阵满足 $T_A \cdot T_B = T_B \cdot T_A$，这种情况在实际机器人运动中普遍存在吗？</h3>
+<p><strong>提示：</strong> 回想矩阵乘法的基本代数性质：$A \cdot B$ 是否等于 $B \cdot A$ ？在空间里先往前走三步再右转，和先右转再往前走三步，位置一样吗？</p>
+<h4>选项</h4>
+<ul>
+<li><input disabled="" type="checkbox"> 普遍存在，因为空间变换满足交换律
+<em>解析：空间变换的核心数学形式是矩阵乘法，而矩阵乘法在绝大多数情况下不满足交换律。</em></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> 不普遍，因为先旋转再平移与先平移再旋转的结果通常完全不同
+<em>解析：矩阵乘法不具备交换律。在空间几何中，改变变换的先后顺序会导致最终的落点姿态大相径庭。</em></li>
+<li><input disabled="" type="checkbox"> 普遍存在，只要不包含旋转就可以交换
+<em>解析：即使全是纯平移，虽然平移自身可交换，但只要混合了多维操作或涉及旋转，齐次变换矩阵整体依然不具备普遍交换性。</em></li>
+<li><input disabled="" type="checkbox"> 不普遍，只有当两个矩阵都是零矩阵时才相等
+<em>解析：合法的齐次变换矩阵最后一行必须有常数 1，因此它们永远不可能是零矩阵。</em></li>
+</ul>
+<hr>
+<h3>题 10. 在机器人正运动学建模中，D-H 参数法生成的单关节变换矩阵，本质上是由关于连杆物理参数的几个基础齐次变换矩阵连续相乘得到的？</h3>
+<p><strong>提示：</strong> 回想一下经典 D-H 参数法的名字：它由哪四个核心几何参数（长度、扭角、偏置、关节角）组成？</p>
+<h4>选项</h4>
+<ul>
+<li><input disabled="" type="checkbox"> 2个
+<em>解析：D-H 参数包含 4 个几何变量，需要对应 4 步基础的坐标变换才能完整描述两个相邻关节轴线的关系。</em></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>(正确答案)</strong> 4个
+<em>解析：标准的 D-H 模型包含四个参数（连杆长度 $a$、连杆扭角 $\alpha$、连杆偏置 $d$、关节角 $\theta$），分别对应两次旋转和两次平移的齐次变换矩阵相乘。</em></li>
+<li><input disabled="" type="checkbox"> 6个
+<em>解析：六自由度机械臂虽然有 6 个关节，但单关节的 D-H 变换矩阵内部只需要 4 个参数变换即可确定。</em></li>
+<li><input disabled="" type="checkbox"> 1个
+<em>解析：单个齐次变换矩阵虽然是最终展现形式，但它在推导时必须拆解为沿着指定轴线分步平移和旋转的复合过程。</em></li>
+</ul>
+<hr>
+</blockquote>
+<p>{.is-ai}</p>
+</div>
+</main>
+
+    
+<footer style="height: 3rem;"></footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            
+            if (link.hostname && link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},  
+                    {left: '$', right: '$', display: false},  
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+            });
+        });
+    </script>
+</body>
+</html>

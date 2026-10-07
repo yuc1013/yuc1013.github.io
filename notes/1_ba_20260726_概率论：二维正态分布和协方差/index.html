@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>概率论：二维正态分布和协方差- 赭原支部</title>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="description" content="">
+
+    
+    <link rel='stylesheet' type='text/css' media='screen' href='/UA.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/variebles.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/base.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/components.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/responsive.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/markdown.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+    
+    
+<header>
+    <nav class="tag-effect-wrapper" style="display: flex;">
+        <div style="flex: 1;"></div>
+        <a href="/" title="Home">Home</a>
+        <a href="/notes/" title="Notes">Notes</a>
+        <a href="/notes-archives/" title="Archives">Archives</a>
+        <a href="/tags/" title="Tags">Tags</a>
+        
+        <a href="/about/" title="About">About</a>
+    </nav>
+</header>
+
+    
+<main class="single">
+    <h1>概率论：二维正态分布和协方差</h1>
+    <p class="flag">
+        <a href="/notes" title="Return upper"><span style="display: inline-block; transform: rotate(180deg);">⤵</span> 返回 /notes</a>
+         · 
+        <span style="display: inline-block; padding: 0.25rem 0;">@舞雩夕</span>
+         · 
+        <time datetime="2026-07-26">Sun, Jul 26, 2026</time>
+        &nbsp;·<a class="tag-effect" href="/tags/ba_%e6%95%b0%e5%ad%a6">ba_数学</a></p>
+    <div class="markdown-content"><p>第一次看到二维正态分布的表达式，可能会很难理解它里面的 $\rho$ 到底是哪里来的：</p>
+<p>$$
+f(x, y) = \frac{1}{2\pi\sigma_x\sigma_y\sqrt{1-\rho^2}} \exp\left( -\frac{1}{2(1-\rho^2)} \left[ \frac{(x-\mu_x)^2}{\sigma_x^2} - 2\rho\frac{(x-\mu_x)(y-\mu_y)}{\sigma_x\sigma_y} + \frac{(y-\mu_y)^2}{\sigma_y^2} \right] \right)
+$$</p>
+<p>本文就从线性变换的视角来理解这里的 $\rho$ 。</p>
+<h2>二维随机变量的线性变换</h2>
+<p>对于非独立的二维随机变量，我们没有独立变量那么好的性质。但是对于由独立变量线性变换得到的非独立变量，我们仍能得到一些很好的结论。所谓从 $(U,V)$ 到 $(X,Y)$ 的线性变换，就是：</p>
+<p>$$
+\begin{pmatrix}
+\frac{x-\mu_x}{\sigma_x} & \frac{y-\mu_y}{\sigma_y} \\
+\end{pmatrix} = 
+\begin{pmatrix}
+u & v \\
+\end{pmatrix}
+\begin{pmatrix}
+\cos \alpha & \cos \beta  \\
+\sin \alpha & \sin \beta \\
+\end{pmatrix} = 
+\begin{pmatrix}
+u & v \\
+\end{pmatrix}
+\begin{pmatrix}
+\cos \theta & \sin \theta  \\
+-\sin \theta & \cos \theta \\
+\end{pmatrix}
+\begin{pmatrix}
+1 & \rho  \\
+0 & \sqrt{1-\rho^2} \\
+\end{pmatrix}
+$$</p>
+<p>一般我们不考虑由 $\theta$ 带来的旋转矩阵，则有：</p>
+<p>$$
+\begin{pmatrix}
+\frac{x-\mu_x}{\sigma_x} & \frac{y-\mu_y}{\sigma_y} \\
+\end{pmatrix} =
+\begin{pmatrix}
+u & v \\
+\end{pmatrix}
+\begin{pmatrix}
+1 & \rho  \\
+0 & \sqrt{1-\rho^2} \\
+\end{pmatrix}
+$$</p>
+<h2>利用线性变换关系得到概率密度函数</h2>
+<p>利用二维随机变量换元的性质：</p>
+<p>$$
+f_{(X,Y)}(x,y)=
+\left|
+\frac{\partial(x,y)}{\partial(u,v)}
+\right|
+f_{(U,V)}(u,v)
+$$</p>
+<p>概率密度函数变换的因子为：</p>
+<p>$$
+\left|
+\frac{\partial(x,y)}{\partial(u,v)}
+\right|
+=
+\begin{bmatrix}
+\sigma_x & \sigma_y\rho  \\
+0 & \sigma_y\sqrt{1-\rho^2} \\
+\end{bmatrix}
+=
+\sigma_x\sigma_y\sqrt{1-\rho^2}
+$$</p>
+<p>可以看到给定 $\sigma_x\sigma_y$ 的情况下，概率密度函数变换因子和线性变换 $\rho$ 的关系是固定的。</p>
+<h2>再求解协方差</h2>
+<blockquote>
+<p>最自然的引入协方差的方式是在 $D(X+Y)$ 的求解中。</p>
+<p>$$
+> D(X+Y) = E((X-\mu_X+Y-\mu_Y)^2) = \sigma_x^2 + \sigma_y^2+2E((X-\mu_X)(Y-\mu_Y))
+> $$</p>
+<p>即可定义：</p>
+<p>$$
+> Cov(X,Y) = E((X-\mu_X)(Y-\mu_Y))
+> $$</p>
+<p>所以，协方差的引入天然就和线性性有关（研究 $X+Y$ 的方差）</p>
+</blockquote>
+<p>$$
+E((X-\mu_X)(Y-\mu_Y)) = \int\int (x-\mu_X) (y-\mu_Y) p_{xy} = \int\int \sigma_xu\sigma_y(\rho u + \sqrt{1-\rho^2}v) p_{uv} (不是p_{uv}A) \\
+= \sigma_x\sigma_y\rho
+$$</p>
+<p>可以看到，协方差和线性变换 $\rho$ 的关系同样是固定的。</p>
+<blockquote>
+<p>鉴于协方差和线性变换的紧密联系，也有一种定义线性相关系数是 $\rho$ 的方法是 $\rho = \frac{Cov(X,Y)}{\sqrt{Var(X)}\sqrt{Var(Y)}}$</p>
+</blockquote>
+<h2>写在最后</h2>
+<p>最近博主突然接了一个任务，两个月的时间里，真的经历了很多，跑了好几个地方，每天回来已经是，根本动不了了，博客的东西是没写过一个字qaq。</p>
+<p>好在现在任务终于是结束了，希望接下来，自己能够有时间把博客给更新一下吧。</p>
+</div>
+</main>
+
+    
+<footer style="height: 3rem;"></footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            
+            if (link.hostname && link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},  
+                    {left: '$', right: '$', display: false},  
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+            });
+        });
+    </script>
+</body>
+</html>

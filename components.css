@@ -1,0 +1,133 @@
+/* 导航栏 */
+nav {
+    padding: 10px;
+}
+
+/* 标签特效 */
+.tag-effect-wrapper a, a.tag-effect {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+
+    color: var(--accent);
+}
+
+.tag-effect-wrapper a:hover, a.tag-effect:hover {
+    text-decoration: none;
+    background-color: var(--bg-code);
+}
+
+/* 单页 */
+.single p.flag {
+    font-size: medium;
+    color: var(--text-muted);
+    margin: 0;
+    margin-bottom: 2.5rem;
+    padding: .25rem 1rem;
+    background-color: rgba(128, 128, 128, 0.05);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+}
+
+/* 主页 */
+aside.anime {
+    position: fixed;
+    right: 5px;
+    bottom: 15px;
+    min-width: 234px;
+    max-width: 308px;
+    background-color: rgba(128, 128, 128, 0.05);
+    padding: 0 1.25rem;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+aside.anime:hover {
+    opacity: .7;
+    box-shadow: none;
+}
+
+.anime img {
+    display: block;
+    width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+    .anime img {
+        filter: brightness(.8);
+    }
+}
+
+[data-theme='dark'] {
+    .anime img {
+        filter: brightness(.8);
+    }
+}
+
+.latest article {
+    margin: 2rem 0;
+    margin-left: .5rem;
+}
+
+.latest p.time {
+    margin: 0;
+}
+
+/* 简要信息 */
+.list h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.list article {
+    margin: 3rem 0;
+}
+
+.brief p.time {
+    margin: 0;
+    font-size: small;
+    color: var(--text-muted);
+}
+
+.brief p.summary {
+    line-height: 1.7;
+}
+
+/* 存档，标签学 */
+.archives h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.archives section {
+    margin: 1.25rem 0;
+    padding-bottom: 1.25rem;
+}
+
+.archives section > p {
+    margin: 1.5rem 0;
+}
+
+/* 标签 */
+.tags h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.tags sup {
+    color: var(--text-muted);
+}
+
+/* 标签学 */
+.taxonomy h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+/* 时间 */
+.archives time, .taxonomy time {
+    margin-left: 0.5rem;
+    font-size: small;
+    color: var(--text-muted);
+}
+

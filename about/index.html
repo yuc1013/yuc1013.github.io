@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>About Me - 赭原支部</title>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="description" content="">
+
+    
+    <link rel='stylesheet' type='text/css' media='screen' href='/UA.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/variebles.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/base.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/components.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/responsive.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/markdown.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+    
+    
+<header>
+    <nav class="tag-effect-wrapper" style="display: flex;">
+        <div style="flex: 1;"></div>
+        <a href="/" title="Home">Home</a>
+        <a href="/notes/" title="Notes">Notes</a>
+        <a href="/notes-archives/" title="Archives">Archives</a>
+        <a href="/tags/" title="Tags">Tags</a>
+        
+        <a href="/about/" title="About">About</a>
+    </nav>
+</header>
+
+    
+<main class="about">
+    <h1>关于</h1>
+    <div class="markdown-content">
+
+        <h2>关于我</h2>
+        <p>我是舞雩夕，我喜欢大容量硬盘和半糖热奶茶。</p>
+        <p>在玩的游戏：</p>
+        <ul>
+            
+            <li>星露谷物语</li>
+            <li>Minecraft</li>
+            <li>Duckov</li>
+            
+            <li>黑神话：悟空</li>
+            
+        </ul>
+        <pre>
+<code>-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mDMEafRWGxYJKwYBBAHaRw8BAQdAVLWWVqzZ1tfOc1rWS0NdRl+mnCzeuJNqmMYP
+snzrUZS0GHl1YzEwMTMgPHl1YzEwMTNAcXEuY29tPoivBBMWCgBXFiEEtBen1Icm
+SB/3D3g/21ECxWrz8dAFAmn0VhsbFIAAAAAABAAObWFudTIsMi41KzEuMTIsMCwz
+AhsDBQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJENtRAsVq8/HQ8kABAJE0
+JDGVL4YDISRP3tlE4a0V3tg+CU4DEQKhOIPcVdYCAQD3e9Mgr/QSxP4ZqrFpTk+l
+57X0Xy8ZxFwrpH0MwJe7Brg4BGn0VhsSCisGAQQBl1UBBQEBB0AjPdN2ant+uEvJ
+6Vw9llQY5+fbCFdIUlyfibQQRuzpDQMBCAeIlAQYFgoAPBYhBLQXp9SHJkgf9w94
+P9tRAsVq8/HQBQJp9FYbGxSAAAAAAAQADm1hbnUyLDIuNSsxLjEyLDAsMwIbDAAK
+CRDbUQLFavPx0CjgAQC5q4/Q33IsGBxQ6IpIzwAUgPwyjMjVnXwnu932DebDnQEA
+nYvliSKt4X6vOxDQHfggmGILcphKdHoJHI0SuJ75jAo=
+=xk+5
+-----END PGP PUBLIC KEY BLOCK-----</code>
+        </pre>
+
+        <h2>关于赭原支部</h2>
+        <p>赭原支部是我的博客，会包含一些技术日志，平时如果折腾了什么有意思的东西，那么也会发在这里（后续可能还会发一些自己写的小说，可能～）</p>
+        <p>名字的灵感来源有两部分。我一直很喜欢“荒原”这一意象——覆盖着低矮、生命力顽强的植物，土地呈现出一种红褐色，风的力量支配着这里，而人类的足迹少有踏及——而「赭」很符合我认为的荒原的颜色，这便是「赭原」。取「支部」二字的原因来于「极东支部」，（游戏《崩坏三》中“圣芙蕾雅学园”的所在地）。这个名字给我一种“独立势力”的感受，我希望我的博客也能给人一种“独立思考”的感觉。</p>
+        <p>技术上我使用了<code>go template</code>+<code>yuin/goldmark</code>的组合，由于很讨厌写front-matter<del>（懒）</del>，所以没有使用更复杂的方案，最后纯代码长度只有<code>944</code>行——</p>
+        <pre>
+<code>% cloc . --exclude-lang Markdown
+      22 text files.
+      20 unique files.                              
+       3 files ignored.
+
+github.com/AlDanial/cloc v 2.06  T=0.01 s (2621.2 files/s, 241543.1 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Go                               1            146            174            944
+CSS                              6             49             42            262
+HTML                            12              5              0            203
+XML                              1              0              0             18
+-------------------------------------------------------------------------------
+SUM:                            20            200            216           1427
+-------------------------------------------------------------------------------</code>
+        </pre>
+        <p>博客样式部分参考了<a href="https://sxyz.blog">Sxyazi's blog</a>和<a href="https://github.com/laozhu/hugo-nuo">hugo-nuo</a>，并得到了<a href="https://gemini.google.com">google gemini</a>的大力帮助。</p>
+
+        <h2>RSS订阅</h2>
+        <p>使用<a href="/index.xml">RSS订阅</a>来获取赭原支部的最新消息。</p>
+    </div>
+</main>
+
+    
+<footer style="height: 3rem;"></footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            
+            if (link.hostname && link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},  
+                    {left: '$', right: '$', display: false},  
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+            });
+        });
+    </script>
+</body>
+</html>
